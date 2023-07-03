@@ -18,8 +18,12 @@ const form = useForm({
 });
 
 const create = () => {
-    form.post(route('tasks.store'))
-    useAlert().Alert('success', 'Task successfully created')
+    form.post(route('tasks.store'), {
+        onSuccess: () => {
+            useAlert().Alert('success', 'Task successfully created')
+        }
+    })
+   
 }
 
 </script>

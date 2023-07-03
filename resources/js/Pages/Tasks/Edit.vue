@@ -19,14 +19,19 @@ const form = useForm({
 });
 
 const update = () => {
-    form.put(route('tasks.update', props.task))
-    useAlert().Alert('success', 'Task successfully updated')
+    form.put(route('tasks.update', props.task), {
+        onSuccess: () => {
+            useAlert().Alert('success', 'Task successfully updated')
+        }
+    })
 }
 
 const showDeleteConfirm = () => {
 
-    useAlert().Confirmation('Delete task', 'Yes, delete task').then(() => {
-        router.delete(route('tasks.destroy', props.task))
+    useAlert().Confirmation('Delete task', 'Yes, delete task').then((confirm) => {
+        if (confirm) {
+            router.delete(route('tasks.destroy', props.task))   
+        }
     })
 }
 
